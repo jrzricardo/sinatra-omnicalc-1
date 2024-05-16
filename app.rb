@@ -27,10 +27,15 @@ end
 
 get("/random/new") do
 
+  erb(:random_number)
 end
 
 get("/random/results") do
-
+  @min_number = params.fetch("user_min").to_i
+  @max_number = params.fetch("user_max").to_i
+  @rand_number = rand(@min_number..@max_number)
+  
+  erb(:random_number_results)
 end
 
 get("payment/new") do

@@ -38,10 +38,22 @@ get("/random/results") do
   erb(:random_number_results)
 end
 
-get("payment/new") do
+get("/payment/new") do
 
+  erb(:payment)
 end
 
-get("payment/results") do
+get("/payment/results") do
+  @apr = params.fetch("user_apr").to_f
+  @years = params.fetch("user_years").to_i
+  @pv = params.fetch("user_pv").to_i
+  
+  percentage_rate = @apr / 100 
+  r = percentage_rate / 12
 
+  n = @years * 12
+
+  payment = (r * @pv) / (1 - (1 + r) ** (n * -1)) 
+  @p = payment.to_fs(:currency)
+  erb(:payment_results)
 end

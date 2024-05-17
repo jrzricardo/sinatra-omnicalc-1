@@ -10,7 +10,7 @@ get("/square/new") do
 end
 
 get("/square/results") do 
-  @user_number = params.fetch("number").to_i
+  @user_number = params.fetch("number").to_f
 
   erb(:square_results)
 end
